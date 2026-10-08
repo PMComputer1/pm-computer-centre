@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PM Computer Centre – Computer courses with hands-on practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f7fa;--ink:#0f2a4a;--muted:#4a5d75;--card:#fff;--line:#d5dde8;--amber:#f2a900;--teal:#0e7c86;--on-amber:#0f2a4a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1b30;--ink:#eef3f9;--muted:#a6b7cc;--card:#12294a;--line:#25406a;--teal:#4fc3cc}}
+:root[data-theme="dark"]{--bg:#0b1b30;--ink:#eef3f9;--muted:#a6b7cc;--card:#12294a;--line:#25406a;--teal:#4fc3cc}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;gap:12px;flex-wrap:wrap}
+.logo{font:800 20px "Bricolage Grotesque",sans-serif;text-decoration:none}
+.logo span{background:var(--amber);color:var(--on-amber);padding:0 8px;border-radius:4px;margin-right:6px}
+nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;font-weight:600}
+nav a{text-decoration:none}nav a:hover{color:var(--teal)}
+.hero{padding:56px 0 48px;display:grid;gap:36px;grid-template-columns:1.1fr .9fr;align-items:center}
+.hero h1{font-size:clamp(38px,6vw,64px);font-weight:800;letter-spacing:-.02em}
+.hero p{color:var(--muted);font-size:19px;max-width:48ch;margin:18px 0 26px}
+.btn{display:inline-block;background:var(--amber);color:var(--on-amber);font-weight:600;padding:13px 22px;border-radius:6px;text-decoration:none;border:2px solid var(--amber);cursor:pointer;font-size:17px;font-family:inherit}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--ink);margin-left:8px}
+.screen{background:#0b1b30;color:#d8e6f5;border-radius:10px;padding:0;overflow:hidden;box-shadow:8px 8px 0 var(--amber);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px}
+.screen .bar{background:#1b3558;padding:8px 14px;font-size:13px;color:#a6b7cc}
+.screen pre{margin:0;padding:18px;white-space:pre-wrap;min-height:190px}
+.cur{display:inline-block;width:9px;height:17px;background:var(--amber);vertical-align:-3px;animation:b 1s steps(2) infinite}
+@keyframes b{50%{opacity:0}}
+section{padding:52px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(28px,4vw,38px);margin-bottom:8px}
+.lead{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.course{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:6px;padding:20px}
+.course h3{font-size:21px;margin-bottom:6px}
+.course p{margin:0 0 10px;color:var(--muted)}
+.course b{font-weight:600}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.why h3{font-size:20px;margin-bottom:6px}.why p{margin:0;color:var(--muted)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line)}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:color-mix(in srgb,var(--teal) 14%,var(--card))}
+.scroll{overflow-x:auto}
+.contact{display:grid;gap:32px;grid-template-columns:1fr 1fr}
+label{display:block;font-weight:600;margin:12px 0 4px}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit}
+.note{font-size:15px;color:var(--muted)}
+#ok{display:none;margin-top:12px;font-weight:600;color:var(--teal)}
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:15px}
+@media (max-width:760px){.hero,.contact{grid-template-columns:1fr}.btn.alt{margin:10px 0 0}}
+@media (prefers-reduced-motion:reduce){.cur{animation:none}html{scroll-behavior:auto}}
+
+.adm{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.adm .full{grid-column:1/-1}
+#recv{display:none;background:var(--card);border:2px solid var(--teal);border-radius:8px;padding:22px;margin-top:20px}
+#recv h3{font-size:24px;margin-bottom:4px}#recv pre{white-space:pre-wrap;font:inherit;background:var(--bg);padding:14px;border-radius:6px;border:1px solid var(--line)}
+#recv .btn{margin:4px 8px 4px 0}.err{color:#c0392b;font-weight:600;margin:10px 0 0}
+@media (max-width:760px){.adm{grid-template-columns:1fr}}
+@media print{header,footer,section:not(#admission),#admission form,#admission .lead,#admission h2,#recv .btn{display:none!important}#recv{display:block!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+<a class="logo" href="#top"><span>PM</span>Computer Centre</a>
+<ul><li><a href="#courses">Courses</a></li><li><a href="#why">Why us</a></li><li><a href="#batches">Batches</a></li><li><a href="#stationery">Stationery</a></li><li><a href="#admission">Admission</a></li><li><a href="#contact">Contact</a></li><li><a href="javascript:void(0)" target="_blank" rel="noopener">Admin</a></li></ul>
+</nav></div></header>
+
+<main id="top">
+<div class="wrap hero">
+<div>
+<h1>Learn computers by using them.</h1>
+<p>Beginner to job-ready courses with a working computer for every student, small batches and teachers who stay until you get it.</p>
+<a class="btn" href="#contact">Book a free demo class</a><a class="btn alt" href="#courses">See courses</a>
+</div>
+<div class="screen" aria-hidden="true">
+<div class="bar">Lab 1 · Practice session</div>
+<pre id="term"></pre>
+</div>
+</div>
+
+<section id="courses"><div class="wrap">
+<h2>Courses</h2>
+<p class="lead">Pick a starting point. Every course ends with a project and a certificate.</p>
+<div class="courses">
+<div class="course"><h3>PGDCA</h3><p>Post Graduate Diploma in Computer Applications. Our full-length diploma course.</p><b>12 months</b></div>
+<div class="course"><h3>Computer Science Tutorial</h3><p>Tuition classes for Computer Science, from school to college level.</p><b>School to college</b></div>
+<div class="course"><h3>Basic Computer</h3><p>Typing, Windows, files, internet and email for first-time users.</p><b>1 month</b></div>
+<div class="course"><h3>MS Office</h3><p>Word, Excel and PowerPoint for office and school work.</p><b>2 months</b></div>
+<div class="course"><h3>Tally with GST</h3><p>Accounts entry, billing, GST returns and reports.</p><b>3 months</b></div>
+<div class="course"><h3>Programming Basics</h3><p>Start with Python and web pages (HTML, CSS).</p><b>3 months</b></div>
+<div class="course"><h3>Graphic Design</h3><p>Photoshop and Canva for posters, photos and social media.</p><b>3 months</b></div>
+<div class="course"><h3>DCA / ADCA</h3><p>Full diploma covering office tools, programming and databases.</p><b>6–12 months</b></div>
+</div></div></section>
+
+<section id="why"><div class="wrap">
+<h2>Why students stay with us</h2>
+<p class="lead" style="margin-bottom:28px">Simple things, done properly.</p>
+<div class="why">
+<div><h3>One student, one computer</h3><p>You practice on your own machine every class, not just watch.</p></div>
+<div><h3>Small batches</h3><p>Fewer students per teacher, so questions get answered.</p></div>
+<div><h3>Flexible timings</h3><p>Morning, afternoon and evening batches for students and workers.</p></div>
+<div><h3>Certificate and project</h3><p>Finish with real work you can show an employer.</p></div>
+</div></div></section>
+
+<section id="batches"><div class="wrap">
+<h2>Batch timings</h2>
+<p class="lead">Call us to confirm the current schedule.</p>
+<div class="scroll"><table>
+<tr><th>Batch</th><th>Time</th><th>Days</th></tr>
+<tr><td>Evening</td><td>4:00 – 9:00 PM</td><td>Mon – Fri</td></tr>
+<tr><td>Weekend</td><td>9:00 AM – 9:00 PM</td><td>Sat – Sun</td></tr>
+</table></div></div></section>
+
+<section id="stationery"><div class="wrap">
+<h2>Stationery shop</h2>
+<p class="lead">Books, pens and school supplies at our centre, so students can pick up what they need before or after class.</p>
+<div class="courses">
+<div class="course"><h3>Notebooks and registers</h3><p>Notebooks, practical files, record books and drawing books.</p></div>
+<div class="course"><h3>Pens and pencils</h3><p>Ball pens, gel pens, pencils, erasers and sharpeners.</p></div>
+<div class="course"><h3>Geometry and drawing</h3><p>Geometry boxes, scales, colours, sketch pens and craft paper.</p></div>
+<div class="course"><h3>Files and office items</h3><p>Files, folders, paper, markers, staplers and tape.</p></div>
+</div>
+<p class="note" style="margin-top:18px">Stock and prices change. Call or message us to check an item before you visit.</p>
+<a class="btn" href="https://wa.me/917002426421?text=Hello%20PM%20Computer%20Centre%2C%20I%20want%20to%20ask%20about%20stationery%20items." target="_blank" rel="noopener">Ask about an item on WhatsApp</a>
+</div></section>
+
+<section id="admission"><div class="wrap">
+<h2>Apply for admission</h2>
+<p class="lead">Fill in the form. You get an application number right away, then send it to us on WhatsApp or email to confirm your seat.</p>
+<form id="af" class="adm" onsubmit="return false" novalidate>
+<div><label for="a1">Student name *</label><input id="a1" autocomplete="name"></div>
+<div><label for="a2">Father / guardian name *</label><input id="a2"></div>
+<div><label for="a3">Date of birth *</label><input id="a3" type="date"></div>
+<div><label for="a4">Gender</label><select id="a4"><option>Male</option><option>Female</option><option>Other</option></select></div>
+<div><label for="a5">Phone number *</label><input id="a5" type="tel" inputmode="numeric" autocomplete="tel"></div>
+<div><label for="a6">Email</label><input id="a6" type="email" autocomplete="email"></div>
+<div class="full"><label for="a7">Address *</label><textarea id="a7" rows="2"></textarea></div>
+<div><label for="a8">Last qualification / class *</label><input id="a8" placeholder="e.g. Class 10, HS, B.A."></div>
+<div><label for="a9">Course *</label><select id="a9"><option>PGDCA (12 months)</option><option>Computer Science Tutorial</option><option>Basic Computer</option><option>MS Office</option><option>Tally with GST</option><option>Programming Basics</option><option>Graphic Design</option><option>DCA / ADCA</option></select></div>
+<div><label for="a10">Preferred batch</label><select id="a10"><option>Evening (4–9 PM, Mon–Fri)</option><option>Weekend (9 AM–9 PM, Sat–Sun)</option></select></div>
+<div class="full"><p id="aerr" class="err" role="alert"></p><button class="btn" id="asub" type="button">Submit application</button></div>
+</form>
+<div id="recv" role="status"><h3>Application received</h3><p>Your application number is <b id="rno"></b>. Your seat is confirmed once you send this to us.</p><pre id="rtxt"></pre>
+<a class="btn" id="rwa" href="#" target="_blank" rel="noopener">Send on WhatsApp</a><a class="btn alt" id="rem" href="#" style="margin-left:0">Send by email</a><button class="btn alt" id="rpr" type="button" style="margin-left:0">Print</button></div>
+</div></section>
+
+<section id="contact"><div class="wrap contact">
+<div>
+<h2>Visit or call us</h2>
+<p class="lead">Drop in for a free demo class and see the lab.</p>
+<p><b>Address:</b> Priti Nagar, Ward No 8, Near Ganesh Mandir, Mangaldai<br><b>Phone:</b> <a href="tel:+917002426421">+91 70024 26421</a><br><b>Email:</b> <a href="mailto:primecomputerc@gmail.com">primecomputerc@gmail.com</a><br><b>Hours:</b> Mon – Fri, 4 – 9 PM · Sat – Sun, 9 AM – 9 PM</p>
+<p><a class="btn alt" style="margin-left:0" href="tel:+917002426421">Call now</a></p>
+</div>
+<div>
+<form id="f" onsubmit="return false">
+<label for="n">Your name</label><input id="n" autocomplete="name">
+<label for="p">Phone number</label><input id="p" type="tel" autocomplete="tel">
+<label for="c">Course</label>
+<select id="c"><option>PGDCA</option><option>Computer Science Tutorial</option><option>Basic Computer</option><option>MS Office</option><option>Tally with GST</option><option>Programming Basics</option><option>Graphic Design</option><option>DCA / ADCA</option></select>
+<p><button class="btn" id="go" type="button">Request a callback on WhatsApp</button></p>
+<div id="ok" role="status">Opening WhatsApp with your request…</div>
+</form>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap">© <span id="y"></span> PM Computer Centre. All rights reserved.</div></footer>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+var lines=["> Welcome to PM Computer Centre","> Today: Excel formulas","","=SUM(B2:B10)","Total: 48,250","","> Well done. Next topic?"];
+var t=document.getElementById('term'),txt=lines.join("\n"),i=0,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function draw(){t.innerHTML=txt.slice(0,i).replace(/</g,'&lt;')+'<span class="cur"></span>'}
+if(reduce){i=txt.length;draw()}else{(function s(){draw();if(i<txt.length){i++;setTimeout(s,55)}})()}
+document.getElementById('go').onclick=function(){
+ if(!document.getElementById('n').value.trim()||!document.getElementById('p').value.trim()){alert('Please enter your name and phone number.');return}
+ var m='Hello PM Computer Centre, I am '+document.getElementById('n').value.trim()+' ('+document.getElementById('p').value.trim()+'). I am interested in the '+document.getElementById('c').value+' course. Please call me.';
+ document.getElementById('ok').style.display='block';
+ location.href='https://wa.me/917002426421?text='+encodeURIComponent(m)};
+
+document.getElementById('asub').onclick=function(){
+ var g=function(i){return document.getElementById(i).value.trim()};
+ var e=document.getElementById('aerr');
+ if(!g('a1')||!g('a2')||!g('a3')||!g('a5')||!g('a7')||!g('a8')){e.textContent='Please fill in all fields marked *.';return}
+ var ph=g('a5').replace(/\D/g,'');
+ if(ph.length<10){e.textContent='Enter a valid 10-digit phone number.';return}
+ if(g('a6')&&!/^\S+@\S+\.\S+$/.test(g('a6'))){e.textContent='Enter a valid email address or leave it blank.';return}
+ e.textContent='';
+ var d=new Date(),pad=function(n){return String(n).padStart(2,'0')};
+ var no='PM-'+String(d.getFullYear()).slice(2)+pad(d.getMonth()+1)+pad(d.getDate())+'-'+Math.floor(1000+Math.random()*9000);
+ var t='ADMISSION APPLICATION\nApplication no: '+no+'\nStudent: '+g('a1')+'\nFather/guardian: '+g('a2')+'\nDate of birth: '+g('a3')+'\nGender: '+g('a4')+'\nPhone: '+g('a5')+'\nEmail: '+(g('a6')||'-')+'\nAddress: '+g('a7')+'\nQualification: '+g('a8')+'\nCourse: '+g('a9')+'\nBatch: '+g('a10');
+ document.getElementById('rno').textContent=no;
+ document.getElementById('rtxt').textContent=t;
+ document.getElementById('rwa').href='https://wa.me/917002426421?text='+encodeURIComponent(t);
+ document.getElementById('rem').href='mailto:primecomputerc@gmail.com?subject='+encodeURIComponent('Admission application '+no)+'&body='+encodeURIComponent(t);
+ var r=document.getElementById('recv');r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'start'});
+};
+document.getElementById('rpr').onclick=function(){window.print()};
+</script>
+</body>
+</html>
